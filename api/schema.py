@@ -39,4 +39,40 @@ class Query(ObjectType):
     def resolve_users(self, info, **kwargs):
         return User.objects.all()
 
-schema = graphene.Schema(query=Query)
+
+class UserInput(graphene.InputObjectType):
+    id = graphene.ID()
+
+class ArticleInput(graphene.InputObjectType):
+    id = graphene.ID()
+    author = graphene.Field(UserInput)
+    title = graphene.String()
+    pub_date = graphene.DateTime()
+    introduction = graphene.String()
+    description = graphene.String()
+    views = graphene.Int()
+
+class ViewArticle(graphene.Mutation):
+    class Arguments:
+        id = graphene.Int(required=True)
+        input = ArticleInput(required=True)
+
+    ok = graphene.Boolean()
+    article = graphene.Field(ArticleType)
+
+    @staticmethod
+    def mutate(root, info, id, input=None):
+        ok = False
+        article_instance = Article.objects.get(pk=id)
+        if article_instance:
+            ok = True
+            article_instance.views += 1
+            article_instance.save()
+            return ViewArticle(ok=ok, article=article_instance)
+        return ViewArticle(ok=ok, article=None)
+
+
+class Mutation(graphene.ObjectType):
+    view_article = ViewArticle.Field()
+
+schema = graphene.Schema(query=Query, mutation=Mutation)
