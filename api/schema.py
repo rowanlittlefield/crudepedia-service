@@ -39,23 +39,9 @@ class Query(ObjectType):
     def resolve_users(self, info, **kwargs):
         return User.objects.all()
 
-
-class UserInput(graphene.InputObjectType):
-    id = graphene.ID()
-
-class ArticleInput(graphene.InputObjectType):
-    id = graphene.ID()
-    author = graphene.Field(UserInput)
-    title = graphene.String()
-    pub_date = graphene.DateTime()
-    introduction = graphene.String()
-    description = graphene.String()
-    views = graphene.Int()
-
 class ViewArticle(graphene.Mutation):
     class Arguments:
         id = graphene.Int(required=True)
-        input = ArticleInput(required=True)
 
     ok = graphene.Boolean()
     article = graphene.Field(ArticleType)

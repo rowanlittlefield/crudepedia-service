@@ -19,5 +19,5 @@ from api.schema import schema
 
 urlpatterns = [
     path('articles/', include('api.articles.urls')),
-    path('graphql/', GraphQLView.as_view(graphiql=False))
+    path('graphql/', GraphQLView.as_view(graphiql=True))
 ]

@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'graphene_django',
     'api',
     'corsheaders',
     'django.contrib.admin',
@@ -59,7 +60,7 @@ MIDDLEWARE = [
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST = (
-    'localhost:8080',
+    'http://localhost:8080',
 )
 
 ROOT_URLCONF = 'api.urls'
