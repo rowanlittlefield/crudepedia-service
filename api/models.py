@@ -1,1 +1,1 @@
-from api.articles.models import *
+from api.article.models import *
