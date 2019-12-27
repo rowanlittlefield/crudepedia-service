@@ -9,6 +9,7 @@ class ArticleType(DjangoObjectType):
 class Query(ObjectType):
     article = graphene.Field(ArticleType, id=graphene.Int())
     articles = graphene.List(ArticleType)
+    most_viewed = graphene.List(ArticleType)
 
     def resolve_article(self, info, **kwargs):
         id = kwargs.get('id')
@@ -20,6 +21,9 @@ class Query(ObjectType):
 
     def resolve_articles(self, info, **kwargs):
         return Article.objects.all()
+
+    def resolve_most_viewed(self, info, **kwargs):
+        return Article.objects.all().order_by('-views')[0:5]
 
 class ViewArticle(graphene.Mutation):
     class Arguments:
