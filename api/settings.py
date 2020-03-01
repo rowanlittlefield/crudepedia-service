@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+from hidden import db_password
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -92,7 +93,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'CRUDEPEDIA',
         'USER': 'root',
-        'PASSWORD': '132435Row!',
+        'PASSWORD': db_password,
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }
