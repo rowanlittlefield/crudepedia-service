@@ -1,7 +1,6 @@
 from collections import defaultdict
 from promise import Promise
 from promise.dataloader import DataLoader
-# from blog.models import Comment
 from django.contrib.auth.models import User
 
 
