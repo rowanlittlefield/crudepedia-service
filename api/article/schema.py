@@ -2,16 +2,18 @@ import graphene
 from graphene_django.types import DjangoObjectType, ObjectType
 from api.article.models import *
 from api.user.schema import UserType
+from api.comment.schema import CommentType
 
 
 class ArticleType(DjangoObjectType):
     class Meta:
         model = Article
 
-    author = graphene.Field(UserType)
-
     def resolve_author(self, info, **kwargs):
         return info.context.authors_by_article_id_loader.load(self.id)
+    
+    def resolve_comment_set(self, info, **kwargs):
+        return info.context.comments_by_article_id_loader.load(self.id)
 
 class Query(ObjectType):
     article = graphene.Field(ArticleType, id=graphene.Int())

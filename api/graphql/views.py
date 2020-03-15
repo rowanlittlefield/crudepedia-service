@@ -1,6 +1,6 @@
 from django.utils.functional import cached_property
 from graphene_django.views import GraphQLView
-from api.graphql.loaders import AuthorsByArticleIdLoader
+from api.graphql.loaders import AuthorsByArticleIdLoader, CommentsByArticleIdLoader
 
 
 class GQLContext:
@@ -14,6 +14,10 @@ class GQLContext:
     @cached_property
     def authors_by_article_id_loader(self):
         return AuthorsByArticleIdLoader()
+
+    @cached_property
+    def comments_by_article_id_loader(self):
+        return CommentsByArticleIdLoader()
 
 
 class CustomGraphQLView(GraphQLView):
