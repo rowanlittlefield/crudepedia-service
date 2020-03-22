@@ -1,8 +1,6 @@
 import graphene
 from graphene_django.types import DjangoObjectType, ObjectType
 from api.article.models import *
-from api.user.schema import UserType
-from api.comment.schema import CommentType
 
 
 class ArticleType(DjangoObjectType):
