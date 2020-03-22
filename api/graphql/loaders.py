@@ -18,7 +18,6 @@ class AuthorsByArticleIdLoader(DataLoader):
 
 class CommentsByArticleIdLoader(DataLoader):
     def batch_load_fn(self, article_ids):
-        print('hello world')
         comments_by_article_ids = defaultdict(list)
 
         for comment in Comment.objects.filter(article_id__in=article_ids).iterator():
